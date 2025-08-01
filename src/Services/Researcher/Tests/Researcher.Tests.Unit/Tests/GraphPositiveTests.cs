@@ -3,8 +3,14 @@ using Researcher.Domain.Entities;
 
 namespace Researcher.Tests.Unit.Tests;
 
+/// <summary>
+/// Набор позитивных юнит-тестов для проверки создания и обновления сущности Graph.
+/// </summary>
 public class GraphPositiveTests
 {
+    /// <summary>
+    /// Проверяет, что конструктор создаёт объект Graph с корректными параметрами.
+    /// </summary>
     [Fact]
     public void Constructor_Should_CreateGraph_WithValidParameters()
     {
@@ -28,6 +34,9 @@ public class GraphPositiveTests
         graph.Edges.Should().NotBeNull().And.BeEmpty();
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор создаёт объект Graph с null в описании.
+    /// </summary>
     [Fact]
     public void Constructor_Should_CreateGraph_WithNullDescription()
     {
@@ -43,6 +52,9 @@ public class GraphPositiveTests
         graph.Description.Should().BeNull();
     }
 
+    /// <summary>
+    /// Проверяет, что метод Update корректно обновляет свойства Graph при валидных параметрах.
+    /// </summary>
     [Fact]
     public void Update_Should_UpdateGraphProperties_WhenValidParameters()
     {

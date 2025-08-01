@@ -3,8 +3,15 @@ using Researcher.Domain.Entities;
 
 namespace Researcher.Domain.Validation;
 
+/// <summary>
+/// Валидатор для сущности Node.
+/// Проверяет корректность заголовка, типа, позиции и идентификатора графа.
+/// </summary>
 public class NodeValidator : AbstractValidator<Node>
 {
+    /// <summary>
+    /// Создаёт экземпляр валидатора с правилами валидации для Node.
+    /// </summary>
     public NodeValidator()
     {
         RuleFor(x => x.Title)
@@ -25,10 +32,10 @@ public class NodeValidator : AbstractValidator<Node>
 
         RuleFor(x => x.Position)
             .NotNull()
-            .WithMessage("Position must be provided.");
+            .WithMessage(ValidationMessages.PositionRequired);
 
         RuleFor(x => x.GraphId)
             .NotEmpty()
-            .WithMessage("GraphId is required.");
+            .WithMessage(ValidationMessages.GraphIdRequired);
     }
 }

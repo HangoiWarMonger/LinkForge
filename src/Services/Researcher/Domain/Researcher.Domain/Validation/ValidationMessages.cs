@@ -1,40 +1,102 @@
 ﻿namespace Researcher.Domain.Validation;
 
+/// <summary>
+/// Сообщения об ошибках валидации.
+/// </summary>
 public static class ValidationMessages
 {
-    public const string TitleRequired = "Title is required.";
+    /// <summary>
+    /// Сообщение об обязательном указании заголовка.
+    /// </summary>
+    public const string TitleRequired = "Требуется указать заголовок.";
 
+    /// <summary>
+    /// Сообщение о максимальной длине заголовка.
+    /// </summary>
     public static string TitleMaxLength =>
-        $"Title must be at most {ValidationConstants.TitleMaxLength} characters.";
+        $"Заголовок должен содержать не более {ValidationConstants.TitleMaxLength} символов.";
 
+    /// <summary>
+    /// Сообщение о максимальной длине описания.
+    /// </summary>
     public static string DescriptionMaxLength =>
-        $"Description must be at most {ValidationConstants.DescriptionMaxLength} characters.";
+        $"Описание должно содержать не более {ValidationConstants.DescriptionMaxLength} символов.";
 
-    public const string InvalidStatus = "Invalid status value.";
+    /// <summary>
+    /// Сообщение о недопустимом значении статуса.
+    /// </summary>
+    public const string InvalidStatus = "Недопустимое значение статуса.";
 
+    /// <summary>
+    /// Сообщение о превышении максимально допустимой глубины вложенности задачи.
+    /// </summary>
     public static string DepthExceeded =>
-        $"Task depth must not exceed {ValidationConstants.MaxDepth}.";
+        $"Глубина задачи не должна превышать {ValidationConstants.MaxDepth}.";
 
-    public const string NameRequired = "Name is required.";
+    /// <summary>
+    /// Сообщение об обязательном указании имени.
+    /// </summary>
+    public const string NameRequired = "Требуется указать имя.";
 
+    /// <summary>
+    /// Сообщение о максимальной длине имени.
+    /// </summary>
     public static string NameMaxLength =>
-        $"Name must be at most {ValidationConstants.NameMaxLength} characters.";
+        $"Имя должно содержать не более {ValidationConstants.NameMaxLength} символов.";
 
-    public const string TypeRequired = "Type is required.";
+    /// <summary>
+    /// Сообщение об обязательном указании типа.
+    /// </summary>
+    public const string TypeRequired = "Требуется указать тип.";
 
+    /// <summary>
+    /// Сообщение о максимальной длине типа.
+    /// </summary>
     public static string TypeMaxLength =>
-        $"Type must be at most {ValidationConstants.TypeMaxLength} characters.";
+        $"Тип должен содержать не более {ValidationConstants.TypeMaxLength} символов.";
 
+    /// <summary>
+    /// Сообщение о превышении максимального количества связей между двумя узлами.
+    /// </summary>
+    /// <param name="fromNodeId">Идентификатор исходного узла.</param>
+    /// <param name="toNodeId">Идентификатор целевого узла.</param>
+    /// <returns>Сообщение об ошибке.</returns>
     public static string MaxEdgesBetweenNodesExceeded(Guid fromNodeId, Guid toNodeId) =>
-        $"Cannot create more than {ValidationConstants.MaxEdgesBetweenNodes} edges between nodes {fromNodeId} and {toNodeId}.";
+        $"Нельзя создать более {ValidationConstants.MaxEdgesBetweenNodes} связей между узлами {fromNodeId} и {toNodeId}.";
 
-    public const string FromNodeRequired = "FromNode must be provided.";
-    public const string ToNodeRequired = "ToNode must be provided.";
+    /// <summary>
+    /// Сообщение об обязательном указании исходного узла (FromNode).
+    /// </summary>
+    public const string FromNodeRequired = "Необходимо указать исходный узел (FromNode).";
 
-    public const string ProjectIdRequired = "ProjectId is required.";
+    /// <summary>
+    /// Сообщение об обязательном указании целевого узла (ToNode).
+    /// </summary>
+    public const string ToNodeRequired = "Необходимо указать целевой узел (ToNode).";
 
-    public const string BodyMarkdownRequired = "BodyMarkdown is required.";
+    /// <summary>
+    /// Сообщение об обязательном указании идентификатора проекта (ProjectId).
+    /// </summary>
+    public const string ProjectIdRequired = "Требуется указать идентификатор проекта (ProjectId).";
 
+    /// <summary>
+    /// Сообщение об обязательном указании содержимого документа (BodyMarkdown).
+    /// </summary>
+    public const string BodyMarkdownRequired = "Требуется указать содержимое (BodyMarkdown).";
+
+    /// <summary>
+    /// Сообщение о максимальной длине содержимого документа (BodyMarkdown).
+    /// </summary>
     public static string BodyMarkdownMaxLength =>
-        $"BodyMarkdown must be at most {ValidationConstants.BodyMarkdownMaxLength} characters.";
+        $"Содержимое (BodyMarkdown) должно содержать не более {ValidationConstants.BodyMarkdownMaxLength} символов.";
+
+    /// <summary>
+    /// Сообщение об обязательном указании позиции.
+    /// </summary>
+    public const string PositionRequired = "Необходимо указать позицию.";
+
+    /// <summary>
+    /// Сообщение об обязательном указании идентификатора графа (GraphId).
+    /// </summary>
+    public const string GraphIdRequired = "Требуется указать идентификатор графа (GraphId).";
 }

@@ -4,17 +4,45 @@ using Researcher.Domain.Validation;
 
 namespace Researcher.Domain.Entities;
 
+/// <summary>
+/// Представляет граф, содержащий узлы и ребра, принадлежащий проекту.
+/// </summary>
 public sealed class Graph : BaseEntity
 {
-    private static readonly IValidator<Graph> _validator = new GraphValidator();
+    private static readonly IValidator<Graph> Validator = new GraphValidator();
 
+    /// <summary>
+    /// Заголовок графа.
+    /// </summary>
     public string Title { get; private set; }
+
+    /// <summary>
+    /// Описание графа.
+    /// </summary>
     public string? Description { get; private set; }
+
+    /// <summary>
+    /// Идентификатор проекта, которому принадлежит граф.
+    /// </summary>
     public Guid ProjectId { get; private set; }
 
+    /// <summary>
+    /// Коллекция узлов, входящих в граф.
+    /// </summary>
     public ICollection<Node> Nodes { get; private set; } = new List<Node>();
+
+    /// <summary>
+    /// Коллекция ребер графа.
+    /// </summary>
     public ICollection<Edge> Edges { get; private set; } = new List<Edge>();
 
+    /// <summary>
+    /// Создаёт новый граф с заданными параметрами.
+    /// </summary>
+    /// <param name="id">Уникальный идентификатор графа.</param>
+    /// <param name="title">Заголовок графа.</param>
+    /// <param name="description">Описание графа.</param>
+    /// <param name="projectId">Идентификатор проекта.</param>
     public Graph(
         Guid id,
         string title,
@@ -22,32 +50,35 @@ public sealed class Graph : BaseEntity
         Guid projectId
     ) : base(id)
     {
-        Guard.Against.NullOrWhiteSpace(title, nameof(title));
-        Guard.Against.Default(projectId, nameof(projectId));
+        Guard.Against.NullOrWhiteSpace(title);
+        Guard.Against.Default(projectId);
 
         Title = title;
         Description = description;
         ProjectId = projectId;
 
-        _validator.ValidateAndThrow(this);
+        Validator.ValidateAndThrow(this);
     }
 
     /// <summary>
     /// Полное обновление графа с валидацией.
     /// </summary>
+    /// <param name="newTitle">Новый заголовок графа.</param>
+    /// <param name="newDescription">Новое описание графа.</param>
+    /// <param name="newProjectId">Новый идентификатор проекта.</param>
     public void Update(
         string newTitle,
         string? newDescription,
         Guid newProjectId
     )
     {
-        Guard.Against.NullOrWhiteSpace(newTitle, nameof(newTitle));
-        Guard.Against.Default(newProjectId, nameof(newProjectId));
+        Guard.Against.NullOrWhiteSpace(newTitle);
+        Guard.Against.Default(newProjectId);
 
         Title = newTitle;
         Description = newDescription;
         ProjectId = newProjectId;
 
-        _validator.ValidateAndThrow(this);
+        Validator.ValidateAndThrow(this);
     }
 }

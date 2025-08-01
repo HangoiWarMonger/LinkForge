@@ -3,8 +3,15 @@ using Researcher.Domain.Entities;
 
 namespace Researcher.Domain.Validation;
 
+/// <summary>
+/// Валидатор для сущности Edge.
+/// Проверяет корректность типа связи, узлов-источника и приёмника.
+/// </summary>
 public class EdgeValidator : AbstractValidator<Edge>
 {
+    /// <summary>
+    /// Создаёт экземпляр валидатора с правилами валидации для Edge.
+    /// </summary>
     public EdgeValidator()
     {
         RuleFor(x => x.Type)

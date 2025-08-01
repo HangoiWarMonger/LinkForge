@@ -6,19 +6,15 @@ using Researcher.Domain.ValueObjects;
 
 namespace Researcher.Tests.Unit.Tests;
 
+/// <summary>
+/// Набор негативных юнит-тестов для проверки конструктора и метода Update сущности Edge на корректную обработку ошибок.
+/// </summary>
 public class EdgeNegativeTests
 {
-    private static Node CreateNode(Guid? id = null)
-    {
-        return new Node(
-            id ?? Guid.NewGuid(),
-            "Node Title",
-            "Some description",
-            "NodeType",
-            new Position(1.0, 2.0),
-            Guid.NewGuid());
-    }
-
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ArgumentException при передаче null, пустой строки или строки из пробелов в параметр type.
+    /// </summary>
+    /// <param name="invalidType">Недопустимое значение типа.</param>
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -35,6 +31,9 @@ public class EdgeNegativeTests
             .WithMessage("*type*");
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ArgumentNullException при передаче null в параметр fromNode.
+    /// </summary>
     [Fact]
     public void Constructor_Should_Throw_When_FromNodeIsNull()
     {
@@ -45,6 +44,9 @@ public class EdgeNegativeTests
             .WithMessage("*fromNode*");
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ArgumentNullException при передаче null в параметр toNode.
+    /// </summary>
     [Fact]
     public void Constructor_Should_Throw_When_ToNodeIsNull()
     {
@@ -55,6 +57,10 @@ public class EdgeNegativeTests
             .WithMessage("*toNode*");
     }
 
+    /// <summary>
+    /// Проверяет, что метод Update выбрасывает ArgumentException при передаче null, пустой строки или строки из пробелов в параметр newType.
+    /// </summary>
+    /// <param name="invalidType">Недопустимое значение нового типа.</param>
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -71,6 +77,9 @@ public class EdgeNegativeTests
             .WithMessage("*newType*");
     }
 
+    /// <summary>
+    /// Проверяет, что метод Update выбрасывает ArgumentNullException при передаче null в параметр newFromNode.
+    /// </summary>
     [Fact]
     public void Update_Should_Throw_When_NewFromNodeIsNull()
     {
@@ -84,6 +93,9 @@ public class EdgeNegativeTests
             .WithMessage("*newFromNode*");
     }
 
+    /// <summary>
+    /// Проверяет, что метод Update выбрасывает ArgumentNullException при передаче null в параметр newToNode.
+    /// </summary>
     [Fact]
     public void Update_Should_Throw_When_NewToNodeIsNull()
     {
@@ -97,6 +109,9 @@ public class EdgeNegativeTests
             .WithMessage("*newToNode*");
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ValidationException при превышении максимальной длины поля Type.
+    /// </summary>
     [Fact]
     public void Constructor_Should_ThrowValidationException_When_TypeExceedsMaxLength()
     {
@@ -108,5 +123,21 @@ public class EdgeNegativeTests
         FluentActions.Invoking(() => new Edge(Guid.NewGuid(), longType, null, fromNode, toNode))
             .Should().Throw<ValidationException>()
             .Where(e => e.Errors.Any(err => err.PropertyName == "Type"));
+    }
+
+    /// <summary>
+    /// Вспомогательный метод для создания валидного узла Node с опциональным заданием идентификатора.
+    /// </summary>
+    /// <param name="id">Опциональный идентификатор узла.</param>
+    /// <returns>Созданный валидный узел Node.</returns>
+    private static Node CreateNode(Guid? id = null)
+    {
+        return new Node(
+            id ?? Guid.NewGuid(),
+            "Node Title",
+            "Some description",
+            "NodeType",
+            new Position(1.0, 2.0),
+            Guid.NewGuid());
     }
 }

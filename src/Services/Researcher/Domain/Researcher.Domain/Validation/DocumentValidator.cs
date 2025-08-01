@@ -3,8 +3,15 @@ using Researcher.Domain.Entities;
 
 namespace Researcher.Domain.Validation;
 
+/// <summary>
+/// Валидатор для сущности Document.
+/// Проверяет корректность заголовка, содержимого и идентификатора проекта.
+/// </summary>
 public class DocumentValidator : AbstractValidator<Document>
 {
+    /// <summary>
+    /// Создаёт экземпляр валидатора с правилами валидации для Document.
+    /// </summary>
     public DocumentValidator()
     {
         RuleFor(x => x.Title)

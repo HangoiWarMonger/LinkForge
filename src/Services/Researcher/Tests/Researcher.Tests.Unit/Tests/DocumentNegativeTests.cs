@@ -5,8 +5,15 @@ using Researcher.Domain.Validation;
 
 namespace Researcher.Tests.Unit.Tests;
 
+/// <summary>
+/// Набор негативных юнит-тестов для проверки корректной обработки ошибок в конструкторе и методе Update сущности Document.
+/// </summary>
 public class DocumentNegativeTests
 {
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ArgumentException при передаче null, пустой строки или строки из пробелов в параметр title.
+    /// </summary>
+    /// <param name="invalidTitle">Недопустимое значение заголовка.</param>
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -25,6 +32,10 @@ public class DocumentNegativeTests
             .WithMessage("*title*");
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ArgumentException при передаче null, пустой строки или строки из пробелов в параметр bodyMarkdown.
+    /// </summary>
+    /// <param name="invalidBody">Недопустимое значение содержимого.</param>
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -43,6 +54,9 @@ public class DocumentNegativeTests
             .WithMessage("*bodyMarkdown*");
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ArgumentException при передаче значения по умолчанию в параметр projectId.
+    /// </summary>
     [Fact]
     public void Constructor_Should_Throw_When_ProjectIdIsDefault()
     {
@@ -59,6 +73,10 @@ public class DocumentNegativeTests
             .WithMessage("*projectId*");
     }
 
+    /// <summary>
+    /// Проверяет, что метод Update выбрасывает ArgumentException при передаче null, пустой строки или строки из пробелов в параметр newTitle.
+    /// </summary>
+    /// <param name="invalidTitle">Недопустимое значение нового заголовка.</param>
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -81,6 +99,10 @@ public class DocumentNegativeTests
             .WithMessage("*newTitle*");
     }
 
+    /// <summary>
+    /// Проверяет, что метод Update выбрасывает ArgumentException при передаче null, пустой строки или строки из пробелов в параметр newBodyMarkdown.
+    /// </summary>
+    /// <param name="invalidBody">Недопустимое значение нового содержимого.</param>
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -103,6 +125,9 @@ public class DocumentNegativeTests
             .WithMessage("*newBodyMarkdown*");
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ValidationException при превышении максимальной длины заголовка.
+    /// </summary>
     [Fact]
     public void Constructor_Should_ThrowValidationException_When_TitleExceedsMaxLength()
     {
@@ -119,6 +144,9 @@ public class DocumentNegativeTests
             .Where(e => e.Errors.Any(err => err.PropertyName == "Title"));
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ValidationException при превышении максимальной длины содержимого bodyMarkdown.
+    /// </summary>
     [Fact]
     public void Constructor_Should_ThrowValidationException_When_BodyMarkdownExceedsMaxLength()
     {

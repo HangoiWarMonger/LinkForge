@@ -10,7 +10,7 @@ public interface IDomainEvent
     /// <summary>
     /// Время создания события в UTC.
     /// </summary>
-    DateTime OccurredOnUtc { get; }
+    DateTimeOffset OccurredOnUtc { get; }
 
     /// <summary>
     /// Опционально: идентификатор источника события (например, Id сущности, с которой связано событие).

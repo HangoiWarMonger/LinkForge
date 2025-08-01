@@ -7,8 +7,15 @@ using Researcher.Domain.ValueObjects;
 
 namespace Researcher.Tests.Unit.Tests;
 
+/// <summary>
+/// Набор негативных юнит-тестов для проверки конструктора и метода Update сущности TaskItem на обработку некорректных данных.
+/// </summary>
 public class TaskItemNegativeTests
 {
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ArgumentException при передаче null, пустой строки или строки из пробелов в параметр title.
+    /// </summary>
+    /// <param name="invalidTitle">Недопустимое значение заголовка.</param>
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -24,11 +31,14 @@ public class TaskItemNegativeTests
             .WithMessage("*title*");
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ArgumentException при передаче значения по умолчанию в параметр projectId.
+    /// </summary>
     [Fact]
     public void Constructor_Should_Throw_When_ProjectIdIsDefault()
     {
         // Arrange
-        var defaultProjectId = default(Guid);
+        var defaultProjectId = Guid.Empty;
 
         // Act & Assert
         FluentActions.Invoking(() => new TaskItem(Guid.NewGuid(), "Valid Title", null, TaskItemStatus.Todo, defaultProjectId))
@@ -36,6 +46,9 @@ public class TaskItemNegativeTests
             .WithMessage("*projectId*");
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает InvalidEnumArgumentException при передаче недопустимого значения в параметр status.
+    /// </summary>
     [Fact]
     public void Constructor_Should_Throw_When_StatusIsOutOfRange()
     {
@@ -49,6 +62,10 @@ public class TaskItemNegativeTests
             .WithMessage("*status*");
     }
 
+    /// <summary>
+    /// Проверяет, что метод Update выбрасывает ArgumentException при передаче null, пустой строки или строки из пробелов в параметр newTitle.
+    /// </summary>
+    /// <param name="invalidTitle">Недопустимое значение нового заголовка.</param>
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -65,6 +82,9 @@ public class TaskItemNegativeTests
             .WithMessage("*newTitle*");
     }
 
+    /// <summary>
+    /// Проверяет, что метод Update выбрасывает InvalidEnumArgumentException при передаче недопустимого значения в параметр newStatus.
+    /// </summary>
     [Fact]
     public void Update_Should_Throw_When_NewStatusIsOutOfRange()
     {
@@ -79,6 +99,9 @@ public class TaskItemNegativeTests
             .WithMessage("*newStatus*");
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ValidationException при превышении максимальной длины заголовка.
+    /// </summary>
     [Fact]
     public void Constructor_Should_ThrowValidationException_When_TitleExceedsMaxLength()
     {
@@ -92,6 +115,9 @@ public class TaskItemNegativeTests
             .Where(e => e.Errors.Any(err => err.PropertyName == "Title"));
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ValidationException при превышении максимальной длины описания.
+    /// </summary>
     [Fact]
     public void Constructor_Should_ThrowValidationException_When_DescriptionExceedsMaxLength()
     {
@@ -105,6 +131,9 @@ public class TaskItemNegativeTests
             .Where(e => e.Errors.Any(err => err.PropertyName == "Description"));
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ValidationException при превышении максимальной глубины вложенности задач.
+    /// </summary>
     [Fact]
     public void Constructor_Should_ThrowValidationException_When_DepthExceedsMax()
     {

@@ -19,13 +19,18 @@ public abstract class BaseEntity : IEquatable<BaseEntity>
     /// <summary>
     /// Время создания сущности в UTC.
     /// </summary>
-    public DateTime CreatedAtUtc { get; protected init; }
+    public DateTimeOffset CreatedAtUtc { get; protected init; }
 
+    /// <summary>
+    /// Инициализирует базовую сущность с заданным уникальным идентификатором и временем создания.
+    /// </summary>
+    /// <param name="id">Уникальный идентификатор сущности.</param>
+    /// <exception cref="ArgumentException">Если идентификатор является значением по умолчанию.</exception>
     protected BaseEntity(Guid id)
     {
         Guard.Against.Default(id);
         Id = id;
-        CreatedAtUtc = DateTime.UtcNow;
+        CreatedAtUtc = DateTimeOffset.UtcNow;
     }
 
     /// <summary>
@@ -52,6 +57,7 @@ public abstract class BaseEntity : IEquatable<BaseEntity>
 
     #region Equality
 
+    /// <inheritdoc />
     public override bool Equals(object? obj)
     {
         if (obj is not BaseEntity other)
@@ -79,6 +85,12 @@ public abstract class BaseEntity : IEquatable<BaseEntity>
         return Id.GetHashCode();
     }
 
+    /// <summary>
+    /// Определяет оператор равенства для сравнения двух сущностей по их идентификаторам.
+    /// </summary>
+    /// <param name="left">Левая сущность для сравнения.</param>
+    /// <param name="right">Правая сущность для сравнения.</param>
+    /// <returns>True, если сущности равны; иначе false.</returns>
     public static bool operator ==(BaseEntity? left, BaseEntity? right)
     {
         if (left is null && right is null)
@@ -90,6 +102,12 @@ public abstract class BaseEntity : IEquatable<BaseEntity>
         return left.Equals(right);
     }
 
+    /// <summary>
+    /// Определяет оператор неравенства для сравнения двух сущностей по их идентификаторам.
+    /// </summary>
+    /// <param name="left">Левая сущность для сравнения.</param>
+    /// <param name="right">Правая сущность для сравнения.</param>
+    /// <returns>True, если сущности не равны; иначе false.</returns>
     public static bool operator !=(BaseEntity? left, BaseEntity? right)
     {
         return !(left == right);

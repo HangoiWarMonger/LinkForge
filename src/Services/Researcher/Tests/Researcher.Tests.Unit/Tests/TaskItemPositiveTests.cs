@@ -4,8 +4,14 @@ using Researcher.Domain.ValueObjects;
 
 namespace Researcher.Tests.Unit.Tests;
 
+/// <summary>
+/// Набор позитивных юнит-тестов для проверки создания и обновления сущности TaskItem с учетом иерархии родитель-ребенок.
+/// </summary>
 public class TaskItemPositiveTests
 {
+    /// <summary>
+    /// Проверяет, что конструктор создаёт задачу с валидными параметрами и корректно устанавливает связь родитель-дочерний элемент.
+    /// </summary>
     [Fact]
     public void Constructor_Should_CreateTaskItem_WithValidParameters_AndSetParentChildRelation()
     {
@@ -39,6 +45,9 @@ public class TaskItemPositiveTests
         child.GetDepth().Should().Be(parent.GetDepth() + 1);
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор создаёт корневую задачу при отсутствии родителя.
+    /// </summary>
     [Fact]
     public void Constructor_Should_CreateRootTask_WhenParentIsNull()
     {
@@ -61,6 +70,9 @@ public class TaskItemPositiveTests
         task.GetDepth().Should().Be(1);
     }
 
+    /// <summary>
+    /// Проверяет, что метод Update корректно обновляет свойства задачи и изменяет родителя с правильным обновлением связей.
+    /// </summary>
     [Fact]
     public void Update_Should_UpdateProperties_AndChangeParentProperly()
     {

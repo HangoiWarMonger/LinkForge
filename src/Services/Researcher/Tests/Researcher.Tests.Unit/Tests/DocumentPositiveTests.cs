@@ -3,8 +3,14 @@ using Researcher.Domain.Entities;
 
 namespace Researcher.Tests.Unit.Tests;
 
+/// <summary>
+/// Набор позитивных юнит-тестов для проверки создания и обновления сущности Document.
+/// </summary>
 public class DocumentPositiveTests
 {
+    /// <summary>
+    /// Проверяет, что конструктор успешно создаёт объект Document при корректных параметрах.
+    /// </summary>
     [Fact]
     public void Constructor_Should_CreateDocument_When_ValidParameters()
     {
@@ -25,10 +31,13 @@ public class DocumentPositiveTests
         document.BodyMarkdown.Should().Be(body);
         document.IsInternal.Should().Be(isInternal);
         document.ProjectId.Should().Be(projectId);
-        document.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(5));
-        document.UpdatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(5));
+        document.CreatedAtUtc.Should().BeCloseTo(DateTimeOffset.UtcNow, TimeSpan.FromSeconds(5));
+        document.UpdatedAt.Should().BeCloseTo(DateTimeOffset.UtcNow, TimeSpan.FromSeconds(5));
     }
 
+    /// <summary>
+    /// Проверяет, что метод Update корректно обновляет свойства сущности при валидных параметрах.
+    /// </summary>
     [Fact]
     public void Update_Should_UpdateProperties_When_ValidParameters()
     {
@@ -51,6 +60,6 @@ public class DocumentPositiveTests
         document.Title.Should().Be(newTitle);
         document.BodyMarkdown.Should().Be(newBody);
         document.IsInternal.Should().Be(newIsInternal);
-        document.UpdatedAt.Should().BeAfter(document.CreatedAt);
+        document.UpdatedAt.Should().BeAfter(document.CreatedAtUtc);
     }
 }

@@ -4,8 +4,15 @@ using Researcher.Domain.ValueObjects;
 
 namespace Researcher.Domain.Validation;
 
+/// <summary>
+/// Валидатор для сущности TaskItem.
+/// Проверяет корректность заголовка, статуса и идентификатора проекта.
+/// </summary>
 public class TaskItemValidator : AbstractValidator<TaskItem>
 {
+    /// <summary>
+    /// Создаёт экземпляр валидатора с правилами валидации для TaskItem.
+    /// </summary>
     public TaskItemValidator()
     {
         RuleFor(x => x.Title)

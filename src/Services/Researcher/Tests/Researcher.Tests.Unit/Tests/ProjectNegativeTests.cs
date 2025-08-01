@@ -5,8 +5,15 @@ using Researcher.Domain.Validation;
 
 namespace Researcher.Tests.Unit.Tests;
 
+/// <summary>
+/// Набор негативных юнит-тестов для проверки конструктора и метода Update сущности Project на обработку некорректных данных.
+/// </summary>
 public class ProjectNegativeTests
 {
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ArgumentException при передаче null, пустой строки или строки из пробелов в параметр name.
+    /// </summary>
+    /// <param name="invalidName">Недопустимое значение имени.</param>
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -22,6 +29,10 @@ public class ProjectNegativeTests
             .WithMessage("*name*");
     }
 
+    /// <summary>
+    /// Проверяет, что метод Update выбрасывает ArgumentException при передаче null, пустой строки или строки из пробелов в параметр newName.
+    /// </summary>
+    /// <param name="invalidName">Недопустимое значение нового имени.</param>
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -37,6 +48,9 @@ public class ProjectNegativeTests
             .WithMessage("*newName*");
     }
 
+    /// <summary>
+    /// Проверяет, что конструктор выбрасывает ValidationException при превышении максимальной длины имени.
+    /// </summary>
     [Fact]
     public void Constructor_Should_ThrowValidationException_When_NameExceedsMaxLength()
     {
