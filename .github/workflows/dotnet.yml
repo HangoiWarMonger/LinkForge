@@ -32,4 +32,4 @@ jobs:
 
     - run: dotnet restore
 
-    - run: dotnet test MySolution.sln --configuration Release --logger "trx"
+    - run: dotnet test LinkForge.sln --configuration Release --logger "trx"
