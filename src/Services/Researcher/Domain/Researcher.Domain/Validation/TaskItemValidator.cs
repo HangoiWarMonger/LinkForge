@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Researcher.Domain.Entities;
+using Researcher.Domain.ValueObjects;
 
 namespace Researcher.Domain.Validation;
 
@@ -19,6 +20,7 @@ public class TaskItemValidator : AbstractValidator<TaskItem>
 
         RuleFor(x => x.Status)
             .IsInEnum()
+            .NotEqual(TaskItemStatus.Undefined)
             .WithMessage(ValidationMessages.InvalidStatus);
 
         RuleFor(x => x)

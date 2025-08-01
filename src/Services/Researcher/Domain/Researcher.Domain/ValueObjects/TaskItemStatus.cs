@@ -1,6 +1,6 @@
 ﻿namespace Researcher.Domain.ValueObjects;
 
-public enum TaskStatus
+public enum TaskItemStatus
 {
     Undefined = 0,
     Todo = 1,
