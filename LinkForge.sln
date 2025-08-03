@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Researcher.Infrastructure.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Researcher.Api", "src\Services\Researcher\Infrastrcuture\Researcher.Api\Researcher.Api.csproj", "{05117454-D64E-42EA-8F7D-96287A13F3EA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{36D01D79-ABDC-4F0B-92A2-2E60D79464B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,7 @@ Global
 		{CAABB8CC-A119-429A-810F-05BBB7CFCDD2} = {2F13F019-226B-447B-9F91-9C6C27B475BF}
 		{BEA22D73-EEDB-460D-9914-C90C47644205} = {49B77368-9F77-475B-857F-1F156C1C4DCE}
 		{05117454-D64E-42EA-8F7D-96287A13F3EA} = {49B77368-9F77-475B-857F-1F156C1C4DCE}
+		{36D01D79-ABDC-4F0B-92A2-2E60D79464B5} = {5C8D87CF-DE3F-4B44-9C4B-5A43F78C3417}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A9B95738-9A28-4995-BA85-5D5FED9775FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
