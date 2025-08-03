@@ -53,6 +53,13 @@ public sealed class Project : BaseEntity
     }
 
     /// <summary>
+    /// Конструктор для ORM или сериализации.
+    /// </summary>
+    private Project()
+    {
+    }
+
+    /// <summary>
     /// Обновляет название и описание проекта с валидацией.
     /// </summary>
     /// <param name="newName">Новое название проекта.</param>

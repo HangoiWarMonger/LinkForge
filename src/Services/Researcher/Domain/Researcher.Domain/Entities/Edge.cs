@@ -76,6 +76,9 @@ public sealed class Edge : BaseEntity
         Validator.ValidateAndThrow(this);
     }
 
+    /// <summary>
+    /// Конструктор для ORM или сериализации.
+    /// </summary>
     private Edge()
     {
     }

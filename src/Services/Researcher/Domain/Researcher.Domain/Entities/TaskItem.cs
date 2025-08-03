@@ -85,6 +85,13 @@ public sealed class TaskItem : BaseEntity
     }
 
     /// <summary>
+    /// Конструктор для ORM или сериализации.
+    /// </summary>
+    private TaskItem()
+    {
+    }
+
+    /// <summary>
     /// Возвращает глубину вложенности задачи в иерархии.
     /// </summary>
     /// <returns>Глубина вложенности задачи.</returns>

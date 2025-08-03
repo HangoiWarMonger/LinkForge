@@ -51,7 +51,7 @@ public abstract class BaseEntity : IEquatable<BaseEntity>
     /// <param name="event">Доменные событие для добавления.</param>
     protected void AddEvent(IDomainEvent @event)
     {
-        Guard.Against.Null(@event, nameof(@event));
+        Guard.Against.Null(@event);
         _events.Add(@event);
     }
 

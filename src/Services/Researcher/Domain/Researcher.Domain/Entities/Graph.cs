@@ -61,6 +61,13 @@ public sealed class Graph : BaseEntity
     }
 
     /// <summary>
+    /// Конструктор для ORM или сериализации.
+    /// </summary>
+    private Graph()
+    {
+    }
+
+    /// <summary>
     /// Полное обновление графа с валидацией.
     /// </summary>
     /// <param name="newTitle">Новый заголовок графа.</param>

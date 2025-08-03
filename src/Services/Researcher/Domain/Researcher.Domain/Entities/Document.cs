@@ -71,6 +71,13 @@ public sealed class Document : BaseEntity
     }
 
     /// <summary>
+    /// Конструктор для ORM или сериализации.
+    /// </summary>
+    private Document()
+    {
+    }
+
+    /// <summary>
     /// Обновляет содержимое документа, флаг внутреннего документа и дату обновления с валидацией.
     /// </summary>
     /// <param name="newTitle">Новый заголовок документа.</param>

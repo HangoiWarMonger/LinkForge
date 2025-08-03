@@ -80,6 +80,13 @@ public sealed class Node : BaseEntity
     }
 
     /// <summary>
+    /// Конструктор для ORM или сериализации.
+    /// </summary>
+    private Node()
+    {
+    }
+
+    /// <summary>
     /// Полное обновление узла с валидацией.
     /// </summary>
     /// <param name="newTitle">Новый заголовок узла.</param>

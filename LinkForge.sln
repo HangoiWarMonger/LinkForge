@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Researcher.Tests.Unit", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Researcher.Application", "src\Services\Researcher\Application\Researcher.Application\Researcher.Application.csproj", "{CAABB8CC-A119-429A-810F-05BBB7CFCDD2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Researcher.Infrastructure.DAL", "src\Services\Researcher\Infrastrcuture\Researcher.Infrastructure.DAL\Researcher.Infrastructure.DAL.csproj", "{BEA22D73-EEDB-460D-9914-C90C47644205}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,7 @@ Global
 		{84F3A0D0-1C71-40E6-81CB-95D832519046} = {5C8D87CF-DE3F-4B44-9C4B-5A43F78C3417}
 		{F1B1E887-E7CD-452A-AF72-ECD85B531411} = {84F3A0D0-1C71-40E6-81CB-95D832519046}
 		{CAABB8CC-A119-429A-810F-05BBB7CFCDD2} = {2F13F019-226B-447B-9F91-9C6C27B475BF}
+		{BEA22D73-EEDB-460D-9914-C90C47644205} = {49B77368-9F77-475B-857F-1F156C1C4DCE}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A9B95738-9A28-4995-BA85-5D5FED9775FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -51,5 +54,9 @@ Global
 		{CAABB8CC-A119-429A-810F-05BBB7CFCDD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAABB8CC-A119-429A-810F-05BBB7CFCDD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAABB8CC-A119-429A-810F-05BBB7CFCDD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEA22D73-EEDB-460D-9914-C90C47644205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEA22D73-EEDB-460D-9914-C90C47644205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEA22D73-EEDB-460D-9914-C90C47644205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEA22D73-EEDB-460D-9914-C90C47644205}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
