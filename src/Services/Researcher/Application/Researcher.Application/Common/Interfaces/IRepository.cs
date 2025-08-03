@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using Researcher.Application.Common.Models;
 using Researcher.Domain.Entities;
 
 namespace Researcher.Application.Common.Interfaces;
@@ -10,54 +11,88 @@ namespace Researcher.Application.Common.Interfaces;
 public interface IRepository<T> where T : BaseEntity
 {
     /// <summary>
-    /// Получает сущность по уникальному идентификатору.
+    /// Получить сущность по идентификатору.
     /// </summary>
     /// <param name="id">Идентификатор сущности.</param>
-    /// <param name="trackChanges">Отслеживать изменения сущности (для обновления).</param>
+    /// <param name="trackChanges">Отслеживать изменения для обновления.</param>
+    /// <param name="includes">Связанные сущности для жадной загрузки.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
-    Task<T?> GetByIdAsync(Guid id, bool trackChanges = false, CancellationToken cancellationToken = default);
+    /// <returns>Сущность или null, если не найдена.</returns>
+    Task<T?> GetByIdAsync(
+        Guid id,
+        bool trackChanges = false,
+        CancellationToken cancellationToken = default,
+        params Expression<Func<T, object>>[] includes);
 
     /// <summary>
-    /// Получает первый элемент, соответствующий условию, либо null.
+    /// Получить первый элемент по условию или null.
     /// </summary>
     /// <param name="predicate">Условие фильтрации.</param>
-    /// <param name="trackChanges">Отслеживать изменения сущности (для обновления).</param>
+    /// <param name="trackChanges">Отслеживать изменения для обновления.</param>
+    /// <param name="includes">Связанные сущности для жадной загрузки.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
     Task<T?> FirstOrDefaultAsync(
         Expression<Func<T, bool>> predicate,
         bool trackChanges = false,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default,
+        params Expression<Func<T, object>>[] includes);
 
     /// <summary>
-    /// Добавляет новую сущность.
+    /// Добавить новую сущность.
     /// </summary>
+    /// <param name="entity">Сущность для добавления.</param>
+    /// <param name="cancellationToken">Токен отмены.</param>
     Task AddAsync(T entity, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Удаляет сущность.
+    /// Удалить сущность.
     /// </summary>
+    /// <param name="entity">Сущность для удаления.</param>
+    /// <param name="cancellationToken">Токен отмены.</param>
     Task RemoveAsync(T entity, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Выполняет запрос с опциональными условиями фильтрации,
-    /// проекции, сортировки и пагинации.
+    /// Выполнить запрос с фильтрацией, сортировкой, пагинацией и загрузкой связей.
     /// </summary>
-    /// <typeparam name="TResult">Тип проекции результата.</typeparam>
     /// <param name="predicate">Условие фильтрации.</param>
-    /// <param name="selector">Проекционное выражение.</param>
-    /// <param name="orderBy">Выражение сортировки.</param>
+    /// <param name="orderBy">Выражение для сортировки.</param>
     /// <param name="ascending">Направление сортировки (true — по возрастанию).</param>
-    /// <param name="skip">Пропустить указанное количество записей.</param>
-    /// <param name="take">Взять указанное количество записей.</param>
-    /// <param name="trackChanges">Отслеживать изменения сущности (для обновления).</param>
+    /// <param name="page">Номер страницы, начиная с 1.</param>
+    /// <param name="pageSize">Размер страницы.</param>
+    /// <param name="trackChanges">Отслеживать изменения для обновления.</param>
     /// <param name="cancellationToken">Токен отмены.</param>
-    Task<IEnumerable<TResult>> QueryAsync<TResult>(
+    /// <param name="includes">Связанные сущности для жадной загрузки.</param>
+    /// <returns>Пагинированный результат.</returns>
+    Task<PaginatedResult<T>> QueryAsync(
+        Expression<Func<T, bool>>? predicate = null,
+        Expression<Func<T, object>>? orderBy = null,
+        bool ascending = true,
+        int? page = null,
+        int? pageSize = null,
+        bool trackChanges = false,
+        CancellationToken cancellationToken = default,
+        params Expression<Func<T, object>>[] includes);
+
+    /// <summary>
+    /// Выполнить запрос с проекцией, фильтрацией, сортировкой и пагинацией.
+    /// </summary>
+    /// <typeparam name="TResult">Тип результата проекции.</typeparam>
+    /// <param name="predicate">Условие фильтрации.</param>
+    /// <param name="selector">Выражение проекции.</param>
+    /// <param name="orderBy">Выражение для сортировки.</param>
+    /// <param name="ascending">Направление сортировки (true — по возрастанию).</param>
+    /// <param name="page">Номер страницы, начиная с 1.</param>
+    /// <param name="pageSize">Размер страницы.</param>
+    /// <param name="cancellationToken">Токен отмены.</param>
+    /// <param name="includes">Связанные сущности для жадной загрузки.</param>
+    /// <returns>Пагинированный результат проекции.</returns>
+    Task<PaginatedResult<TResult>> QueryAsync<TResult>(
         Expression<Func<T, bool>>? predicate = null,
         Expression<Func<T, TResult>>? selector = null,
         Expression<Func<T, object>>? orderBy = null,
         bool ascending = true,
-        int? skip = null,
-        int? take = null,
-        bool trackChanges = false,
-        CancellationToken cancellationToken = default);
+        int? page = null,
+        int? pageSize = null,
+        CancellationToken cancellationToken = default,
+        params Expression<Func<T, object>>[] includes);
 }
