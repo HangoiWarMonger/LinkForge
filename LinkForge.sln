@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7F9B5426-21B6-49B6-AD77-A9BFB118CEFC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{AD5EAB39-CFAF-4D97-BF2B-9304ACC10C52}"
+	ProjectSection(SolutionItems) = preProject
+		SolutionItems\docker-compose.yml = SolutionItems\docker-compose.yml
+		SolutionItems\.env = SolutionItems\.env
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{42AB7CBC-A472-44C5-ACE0-681E55E9E2F0}"
 EndProject
