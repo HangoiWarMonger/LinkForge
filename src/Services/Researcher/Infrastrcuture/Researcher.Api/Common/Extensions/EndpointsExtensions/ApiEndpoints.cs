@@ -1,4 +1,6 @@
-﻿namespace Researcher.Api.Common.Extensions.EndpointsExtensions;
+﻿using Scalar.AspNetCore;
+
+namespace Researcher.Api.Common.Extensions.EndpointsExtensions;
 
 /// <summary>
 /// Расширения для регистрации групп эндпоинтов API.
@@ -8,10 +10,21 @@ public static class ApiEndpoints
     /// <summary>
     /// Регистрирует основные группы эндпоинтов приложения под префиксом /api.
     /// </summary>
-    /// <param name="routes">Роутер для регистрации эндпоинтов.</param>
-    public static void MapApiEndpoints(this IEndpointRouteBuilder routes)
+    /// <param name="app">Роутер для регистрации эндпоинтов.</param>
+    public static void MapApiEndpoints(this WebApplication app)
     {
-        var group = routes.MapGroup("/api");
+        var group = app.MapGroup("/api");
+
+        if (app.Environment.IsDevelopment())
+        {
+            app.MapOpenApi();
+            app.MapScalarApiReference(opt =>
+            {
+                opt.Title = "Researcher.Api";
+                opt.Theme = ScalarTheme.DeepSpace;
+                opt.DefaultHttpClient = new(ScalarTarget.Http, ScalarClient.Http11);
+            });
+        }
 
         group.MapDocumentEndpoints();
         group.MapProjectEndpoints();

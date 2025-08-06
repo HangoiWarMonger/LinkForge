@@ -1,6 +1,4 @@
-﻿using Scalar.AspNetCore;
-
-namespace Researcher.Api.Common.Middlewares;
+﻿namespace Researcher.Api.Common.Middlewares;
 
 /// <summary>
 /// Расширения для подключения middleware и сервисов в конвейере ASP.NET Core.
@@ -18,13 +16,11 @@ public static class WebApplicationMiddleware
 
         if (app.Environment.IsDevelopment())
         {
-            app.MapOpenApi();
-            app.MapScalarApiReference(opt =>
-            {
-                opt.Title = "Researcher.Api";
-                opt.Theme = ScalarTheme.DeepSpace;
-                opt.DefaultHttpClient = new(ScalarTarget.Http, ScalarClient.Http11);
-            });
+            app.UseCors(builder =>
+                builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
         }
 
         app.UseHttpsRedirection();

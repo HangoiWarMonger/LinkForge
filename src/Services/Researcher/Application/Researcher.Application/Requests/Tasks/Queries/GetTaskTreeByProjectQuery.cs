@@ -47,6 +47,6 @@ public class GetTaskTreeByProjectQueryHandler
             trackChanges: false,
             cancellationToken: cancellationToken);
 
-        return _mapper.Map<List<TaskItemDto>>(tasks);
+        return _mapper.Map<List<TaskItemDto>>(tasks.Items);
     }
 }

@@ -77,6 +77,7 @@ public static class DependencyInjection
     /// <returns>Коллекция сервисов с добавленными зависимостями.</returns>
     public static IServiceCollection AddWebServices(this IServiceCollection services)
     {
+        services.AddCors();
         services.AddProblemDetails();
         services.AddEndpointsApiExplorer();
         services.AddSingleton<GlobalExceptionMiddleware>();

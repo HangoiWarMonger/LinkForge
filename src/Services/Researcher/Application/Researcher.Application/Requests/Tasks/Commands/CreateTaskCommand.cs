@@ -68,7 +68,7 @@ public class CreateTaskCommandHandler
         {
             parent = await _parentRepository.GetByIdAsync(
                 request.ParentId.Value,
-                trackChanges: false,
+                trackChanges: true,
                 cancellationToken);
             ThrowIf.EntityIsNull(parent, request.ParentId.Value);
         }
